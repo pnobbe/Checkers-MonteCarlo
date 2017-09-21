@@ -14,7 +14,7 @@ public class Board {
         checkerRed = Resources.Load("Art/r_CheckerRed") as Material;
     }
     
-    public void Initialize() {
+    public void InitializeCheckers() {
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 3; y++) {
                 if((x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
