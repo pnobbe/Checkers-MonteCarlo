@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SimpleAI", menuName = "Controllers/SimpleAI")]
-public class SimpleAI : Controller {
+public class Opponent : Controller {
 
 }
