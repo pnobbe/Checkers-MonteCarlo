@@ -11,6 +11,7 @@ public class Game : MonoBehaviour {
     public Button[,] buttons = new Button[3, 3];
     [HideInInspector]
     public char[,] characters = new char[,] { { '0', '0', '0' }, { '0', '0', '0' }, { '0', '0', '0' } };
+    public Text endgameText;
 
     private Controller current;
     private int turn = 0;
@@ -37,37 +38,35 @@ public class Game : MonoBehaviour {
     }
 
     public void PlaceCharacter(Point2 p, Controller controller) {
-        // Plaats character c in de double array
-        // Doe enkele for loops (diagonaal x 2, verticaal, horizontaal)
         ClickButton(p, controller.character, controller.color);
 
         characters[p.x, p.y] = controller.character;
 
         if (IsHorizontalWin(p.y) || IsVerticalWin(p.x)) {
-            EndGame();
+            EndGame(controller.winText, controller.color);
             return;
         }
 
         if (p.x == 1 && p.y == 1) {
             if (IsDiagonalWin(Point2.zero, Point2.one * 2) || IsDiagonalWin(new Point2(0, 2), new Point2(2, 0))) {
-                EndGame();
+                EndGame(controller.winText, controller.color);
                 return;
             }
         } else if ((p.x == 0 && p.y == 0) || (p.x == 2 && p.y == 2)) {
             if (IsDiagonalWin(Point2.zero, Point2.one * 2)) {
-                EndGame();
+                EndGame(controller.winText, controller.color);
                 return;
             }
         } else if ((p.x == 0 && p.y == 2) || (p.x == 2 && p.y == 0)) {
             if (IsDiagonalWin(new Point2(0, 2), new Point2(2, 0))) {
-                EndGame();
+                EndGame(controller.winText, controller.color);
                 return;
             }
         }
 
         turn++;
         if (turn > 8) {
-            Debug.Log("Draw");
+            EndGame("It's a draw!", new Color(1, 218f / 255f, 122f / 255f, 1));
             return;
         }
 
@@ -99,11 +98,13 @@ public class Game : MonoBehaviour {
         text.color = color;
     }
 
-    private void EndGame() {
+    private void EndGame(string text, Color color) {
         foreach(Controller c in controllers) {
             c.OnDisableTurn();
         }
 
-        Debug.Log("It's a win!");
+        endgameText.text = text;
+        endgameText.color = color;
+        endgameText.gameObject.SetActive(true);
     }
 }

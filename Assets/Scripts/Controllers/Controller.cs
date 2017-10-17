@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Controller : ScriptableObject {
 
     public Color color;
+    public string winText;
     public char character;
     public bool isTurn { get; set; }
 
