@@ -7,7 +7,15 @@ public class Opponent : Controller {
 
     public override void OnEnableTurn() {
         base.OnEnableTurn();
+        game.StartCoroutine(game.WaitForSeconds(.5f, new System.Action(PlaceCharacter)));
+    }
 
+    private IEnumerator WaitForSeconds(float f) {
+        yield return new WaitForSeconds(f);
+        PlaceCharacter();
+    }
+
+    private void PlaceCharacter() {
         game.PlaceCharacter(GetAvailableTile(), this);
     }
 

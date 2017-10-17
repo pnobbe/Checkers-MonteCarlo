@@ -33,6 +33,11 @@ public class Game : MonoBehaviour {
         current.OnEnableTurn();
     }
 
+    public IEnumerator WaitForSeconds(float f, System.Action action) {
+        yield return new WaitForSeconds(f);
+        action.Invoke();
+    }
+
     public void RestartScene() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
