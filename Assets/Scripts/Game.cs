@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
@@ -29,6 +30,10 @@ public class Game : MonoBehaviour {
 
         current = controllers[0];
         current.OnEnableTurn();
+    }
+
+    public void RestartScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void PlaceCharacter(Point2 p, Controller controller) {
