@@ -1,0 +1,7 @@
+C:\Users\Patrick\source\repos\ConsoleApp1\ConsoleApp1\obj\Debug\MonteCarlo.csprojResolveAssemblyReference.cache
+C:\Users\Patrick\source\repos\ConsoleApp1\ConsoleApp1\obj\Debug\MonteCarlo.csproj.CoreCompileInputs.cache
+C:\Users\Patrick\source\repos\ConsoleApp1\ConsoleApp1\bin\Debug\MonteCarlo.exe.config
+C:\Users\Patrick\source\repos\ConsoleApp1\ConsoleApp1\bin\Debug\MonteCarlo.exe
+C:\Users\Patrick\source\repos\ConsoleApp1\ConsoleApp1\bin\Debug\MonteCarlo.pdb
+C:\Users\Patrick\source\repos\ConsoleApp1\ConsoleApp1\obj\Debug\MonteCarlo.exe
+C:\Users\Patrick\source\repos\ConsoleApp1\ConsoleApp1\obj\Debug\MonteCarlo.pdb
