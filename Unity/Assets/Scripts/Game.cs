@@ -46,26 +46,19 @@ public class Game : MonoBehaviour {
         ClickButton(p, controller.character, controller.color);
 
         characters[p.x, p.y] = controller.character;
+        Debug.Log(p + " " + controller.character);
 
-        // All cases
+        // Horizontal & Vertical
         if (IsHorizontalWin(p.y) || IsVerticalWin(p.x)) {
             EndGame(controller.winText, controller.color);
             return;
         }
 
-        // Center cases
-        if (p.x == 1 && p.y == 1) {
-            if (IsDiagonalWin(Point2.zero, Point2.one * 2) || IsDiagonalWin(new Point2(0, 2), new Point2(2, 0))) {
-                EndGame(controller.winText, controller.color);
-                return;
-            }
-        // Edge cases
-        } else if ((p.x == 0 && p.y == 0) || (p.x == 2 && p.y == 2)) {
-            if (IsDiagonalWin(p, new Point2(2, 2) - p)) {
-                EndGame(controller.winText, controller.color);
-                return;
-            }
-        } 
+        // Diagonal
+        if (IsDiagonalWin(new Point2(0, 0), new Point2(2, 2)) || IsDiagonalWin(new Point2(0, 2), new Point2(2, 0))) {
+            EndGame(controller.winText, controller.color);
+            return;
+        }
 
         turn++;
         if (turn > 8) {
