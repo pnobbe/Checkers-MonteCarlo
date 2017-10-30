@@ -56,8 +56,8 @@ namespace MonteCarlo {
         }
 
         private void SetText() {
-            text.text = string.Format("<color={0}>Player wins</color>: {1:00}\n", cplayer.ToString(), playerWins);
-            text.text += string.Format("<color={0}>Opponent wins</color>: {1:00}\n", copponent.ToString(), opponentWins);
+            text.text = string.Format("<color={0}>Player</color> wins: {1:00}\n", "#4281A4FF", playerWins);
+            text.text += string.Format("<color={0}>Opponent</color> wins: {1:00}\n", "#FF5964FF", opponentWins);
             text.text += string.Format("Draws: {0:00}", draws);
         }
 
