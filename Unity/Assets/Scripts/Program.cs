@@ -11,8 +11,8 @@ namespace MonteCarlo {
         public GameObject endDisplay;
         public Text text;
 
-        private Color cplayer = Color.green;
-        private Color copponent = Color.red;
+        public Color cplayer;
+        public Color copponent;
 
         private Player current;
 
@@ -25,6 +25,8 @@ namespace MonteCarlo {
 
         private int currentStartingPlayer = 2;
         private int currentPlayer;
+
+        private int playerWins, opponentWins, draws;
 
         private void Awake() {
             Button[] bs = FindObjectsOfType<Button>();
@@ -40,6 +42,7 @@ namespace MonteCarlo {
             endDisplay.SetActive(false);
             mcts = new MonteCarloTreeSearch(numOfMCiterations);
             board = new Board();
+            SetText();
 
             for (int x = 0; x < 3; x++)
                 for (int y = 0; y < 3; y++) {
@@ -52,17 +55,21 @@ namespace MonteCarlo {
             if (currentPlayer == 2) PerformOpponentMove(2);
         }
 
+        private void SetText() {
+            text.text = string.Format("<color={0}>Player wins</color>: {1:00}\n", cplayer.ToString(), playerWins);
+            text.text += string.Format("<color={0}>Opponent wins</color>: {1:00}\n", copponent.ToString(), opponentWins);
+            text.text += string.Format("Draws: {0:00}", draws);
+        }
+
         public void PerformMove(Button b) {
             if (currentPlayer == 2) return;
 
             ButtonValue bv = b.GetComponent<ButtonValue>();
             board.performMove(1, new Position(bv.x, bv.y));
-
-            FillText();
+            
             FillButtons();
 
             string s = board.printStatus();
-            Debug.Log(s);
 
             if (s == "Game In progress") {
                 currentPlayer = 2;
@@ -74,8 +81,7 @@ namespace MonteCarlo {
 
         private void PerformOpponentMove(int player) {
             board = mcts.findNextMove(board, player);
-
-            FillText();
+            
             FillButtons();
 
             string s = board.printStatus();
@@ -89,21 +95,22 @@ namespace MonteCarlo {
         }
 
         private void GameFinished() {
+            string status = board.printStatus();
+
+            switch (status) {
+                case "Player 1 wins":
+                    playerWins++;
+                    break;
+                case "Player 2 wins":
+                    opponentWins++;
+                    break;
+                case "Game Draw":
+                    draws++;
+                    break;
+            }
+
             endDisplay.SetActive(true);
-            endDisplay.transform.Find("EndText").GetComponent<Text>().text = board.printStatus();
-        }
-
-        private void FillText() {
-            int[,] b = board.getBoardValues();
-            string[] data = new string[] { "", "", "" };
-
-            for (int x = 0; x < 3; x++)
-                for (int y = 0; y < 3; y++) {
-                    data[y] += b[x, y] + " ";
-                }
-
-            string textt = data[2] + "\n" + data[1] + "\n" + data[0];
-            text.text = textt;
+            endDisplay.transform.Find("EndText").GetComponent<Text>().text = status;
         }
 
         private void FillButtons() {
