@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,10 +75,19 @@ namespace MonteCarlo {
 
             if (s == "Game In progress") {
                 currentPlayer = 2;
-                PerformOpponentMove(2);
+                WaitBeforeOpponentMove(2);
             } else {
                 GameFinished();
             }
+        }
+
+        private void WaitBeforeOpponentMove(int player) {
+            StartCoroutine(WaitForPerforming(player));
+        }
+
+        private IEnumerator WaitForPerforming(int player) {
+            yield return new WaitForSeconds(0.2f);
+            PerformOpponentMove(player);
         }
 
         private void PerformOpponentMove(int player) {
