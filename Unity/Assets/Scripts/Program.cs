@@ -47,6 +47,7 @@ namespace MonteCarlo {
             for (int x = 0; x < 3; x++)
                 for (int y = 0; y < 3; y++) {
                     buttons[x, y].GetComponent<Image>().color = Color.white;
+                    buttons[x, y].GetComponentInChildren<Text>().text = "";
                 }
 
             currentStartingPlayer = 3 - currentStartingPlayer;
@@ -120,6 +121,7 @@ namespace MonteCarlo {
                 for (int y = 0; y < 3; y++) {
                     if (bo[x, y] == 1 || bo[x, y] == 2) {
                         buttons[x, y].GetComponent<Image>().color = bo[x, y] == 1 ? cplayer : copponent;
+                        buttons[x, y].GetComponentInChildren<Text>().text = bo[x, y] == 1 ? "X" : "O";
                     }
                 }
         }
