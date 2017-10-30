@@ -39,6 +39,11 @@ namespace MonteCarlo {
             NextGame();
         }
 
+        private void Update() {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
+        }
+
         public void NextGame() {
             endDisplay.SetActive(false);
             mcts = new MonteCarloTreeSearch(numOfMCiterations);
