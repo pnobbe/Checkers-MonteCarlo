@@ -65,8 +65,13 @@ namespace MonteCarlo {
 
         public void PerformMove(Button b) {
             if (currentPlayer == 2) return;
-
+            
             ButtonValue bv = b.GetComponent<ButtonValue>();
+
+            if(board.getBoardValues()[bv.x, bv.y] != 0) {
+                return;
+            }
+
             board.performMove(1, new Position(bv.x, bv.y));
             
             FillButtons();
